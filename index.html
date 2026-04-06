@@ -356,6 +356,8 @@
             z-index: 2;
             background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.7) 70%, transparent 100%);
             padding: 3rem 1.5rem 2rem;
+            opacity: 0;
+            transition: opacity 0.5s ease;
         }
 
         .service-text p {
@@ -373,7 +375,7 @@
             font-weight: 300;
         }
 
-        /* Desktop: bold on hover */
+        /* Desktop: bold on hover + show description */
         @media (min-width: 769px) {
             .service-card:hover h3 {
                 font-weight: 600;
@@ -381,15 +383,22 @@
             .service-card:hover p {
                 font-weight: 400;
             }
+            .service-card:hover .service-text {
+                opacity: 1;
+            }
         }
 
-        /* Mobile: bold when active (centered) */
+        /* Mobile: bold when active (centered) + show description */
         .service-card.active h3 {
             font-weight: 600;
         }
 
         .service-card.active p {
             font-weight: 400;
+        }
+
+        .service-card.active .service-text {
+            opacity: 1;
         }
 
         /* Gallery */
