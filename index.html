@@ -193,10 +193,46 @@
 
         /* Services */
         .services-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 0;
             border-top: 1px solid #333;
+        }
+
+        /* Desktop: horizontal scroll */
+        @media (min-width: 769px) {
+            .services-grid {
+                display: flex;
+                overflow-x: auto;
+                overflow-y: hidden;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                gap: 0;
+                scroll-behavior: smooth;
+            }
+
+            .services-grid::-webkit-scrollbar {
+                height: 8px;
+            }
+
+            .services-grid::-webkit-scrollbar-track {
+                background: #2a2a2a;
+            }
+
+            .services-grid::-webkit-scrollbar-thumb {
+                background: #666;
+                border-radius: 4px;
+            }
+
+            .services-grid::-webkit-scrollbar-thumb:hover {
+                background: #888;
+            }
+        }
+
+        /* Mobile: grid layout */
+        @media (max-width: 768px) {
+            .services-grid {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
         }
 
         .service-card {
@@ -212,7 +248,23 @@
             flex-direction: column;
             justify-content: space-between;
             cursor: pointer;
-            opacity: 0.25;
+        }
+
+        /* Desktop: all cards prominent, fixed width for scroll */
+        @media (min-width: 769px) {
+            .service-card {
+                flex: 0 0 500px;
+                width: 500px;
+                scroll-snap-align: start;
+                opacity: 1;
+            }
+        }
+
+        /* Mobile: opacity behavior */
+        @media (max-width: 768px) {
+            .service-card {
+                opacity: 0.25;
+            }
         }
 
         /* Background image layer */
@@ -230,23 +282,22 @@
             z-index: 0;
         }
 
-        /* Desktop: hover behavior */
+        /* Desktop: hover behavior (background image only) */
         @media (min-width: 769px) {
-            .service-card:hover {
-                opacity: 1;
-            }
             .service-card:hover::before {
                 opacity: 0.75;
             }
         }
 
         /* Mobile: active class from JavaScript */
-        .service-card.active {
-            opacity: 1;
-        }
+        @media (max-width: 768px) {
+            .service-card.active {
+                opacity: 1;
+            }
 
-        .service-card.active::before {
-            opacity: 0.75;
+            .service-card.active::before {
+                opacity: 0.75;
+            }
         }
 
         .service-card:nth-child(1)::before {
@@ -288,10 +339,6 @@
         .service-card > * {
             position: relative;
             z-index: 1;
-        }
-
-        .service-card:nth-child(3n) {
-            border-right: none;
         }
 
         .service-card h3 {
@@ -721,16 +768,6 @@
         }
 
         /* Responsive */
-        @media (max-width: 1024px) {
-            .services-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .service-card:nth-child(2n) {
-                border-right: none;
-            }
-        }
-
         @media (max-width: 768px) {
             nav .container {
                 padding: 1rem 1.5rem;
