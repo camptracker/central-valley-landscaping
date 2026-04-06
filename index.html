@@ -194,32 +194,48 @@
         /* Services */
         .services-grid {
             border-top: 1px solid #333;
-            display: flex;
-            overflow-x: auto;
-            overflow-y: hidden;
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
-            gap: 0;
-            scroll-behavior: smooth;
         }
 
-        .services-grid::-webkit-scrollbar {
-            height: 8px;
+        /* Desktop: horizontal carousel */
+        @media (min-width: 769px) {
+            .services-grid {
+                display: flex;
+                overflow-x: auto;
+                overflow-y: hidden;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                gap: 0;
+                scroll-behavior: smooth;
+            }
+
+            .services-grid::-webkit-scrollbar {
+                height: 8px;
+            }
+
+            .services-grid::-webkit-scrollbar-track {
+                background: #2a2a2a;
+            }
+
+            .services-grid::-webkit-scrollbar-thumb {
+                background: #666;
+                border-radius: 4px;
+            }
+
+            .services-grid::-webkit-scrollbar-thumb:hover {
+                background: #888;
+            }
         }
 
-        .services-grid::-webkit-scrollbar-track {
-            background: #2a2a2a;
+        /* Mobile: vertical grid */
+        @media (max-width: 768px) {
+            .services-grid {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
         }
 
-        .services-grid::-webkit-scrollbar-thumb {
-            background: #666;
-            border-radius: 4px;
-        }
-
-        .services-grid::-webkit-scrollbar-thumb:hover {
-            background: #888;
-        }
-
+        /* Desktop only: carousel indicators */
         .services-indicators {
             display: none;
         }
@@ -264,24 +280,23 @@
             flex-direction: column;
             justify-content: space-between;
             cursor: pointer;
-            scroll-snap-align: start;
         }
 
-        /* Desktop: 500px wide cards */
+        /* Desktop: 500px wide horizontal scroll cards */
         @media (min-width: 769px) {
             .service-card {
                 flex: 0 0 500px;
                 width: 500px;
+                scroll-snap-align: start;
                 opacity: 1;
             }
         }
 
-        /* Mobile: full viewport width cards, opacity behavior */
+        /* Mobile: vertical grid, opacity behavior */
         @media (max-width: 768px) {
             .service-card {
-                flex: 0 0 85vw;
-                width: 85vw;
                 opacity: 0.25;
+                border-right: none;
             }
         }
 
@@ -1064,22 +1079,19 @@
             this.reset();
         });
 
-        // Service card horizontal scroll visibility (mobile only)
+        // Service card vertical scroll visibility (mobile only)
         if (window.innerWidth <= 768) {
-            const servicesGrid = document.querySelector('.services-grid');
             const serviceCards = document.querySelectorAll('.service-card');
             
             function updateActiveCard() {
-                const containerRect = servicesGrid.getBoundingClientRect();
-                const containerCenter = containerRect.left + (containerRect.width / 2);
-                
+                const viewportCenter = window.innerHeight / 2 + window.scrollY;
                 let closestCard = null;
                 let minDistance = Infinity;
 
                 serviceCards.forEach(card => {
                     const rect = card.getBoundingClientRect();
-                    const cardCenter = rect.left + (rect.width / 2);
-                    const distance = Math.abs(containerCenter - cardCenter);
+                    const cardCenter = rect.top + window.scrollY + (rect.height / 2);
+                    const distance = Math.abs(viewportCenter - cardCenter);
                     
                     if (distance < minDistance) {
                         minDistance = distance;
@@ -1090,14 +1102,14 @@
                 // Remove active class from all cards
                 serviceCards.forEach(card => card.classList.remove('active'));
                 
-                // Add active class to card closest to horizontal center
+                // Add active class to card closest to viewport center
                 if (closestCard) {
                     closestCard.classList.add('active');
                 }
             }
 
             // Update on scroll and initially
-            servicesGrid.addEventListener('scroll', updateActiveCard);
+            window.addEventListener('scroll', updateActiveCard);
             updateActiveCard();
         }
 
