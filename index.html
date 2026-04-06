@@ -192,10 +192,10 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            opacity: 0.25;
             cursor: pointer;
         }
 
+        /* Background image layer */
         .service-card::before {
             content: '';
             position: absolute;
@@ -210,6 +210,7 @@
             z-index: 0;
         }
 
+        /* Gradient overlay */
         .service-card::after {
             content: '';
             position: absolute;
@@ -219,33 +220,29 @@
             height: 60%;
             background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.7) 50%, transparent 100%);
             z-index: 1;
-            transition: height 0.5s ease;
+            transition: all 0.5s ease;
+            opacity: 0.25;
         }
 
         /* Desktop: hover behavior */
         @media (min-width: 769px) {
-            .service-card:hover {
-                opacity: 1;
-            }
             .service-card:hover::before {
                 opacity: 0.75;
             }
             .service-card:hover::after {
                 height: 70%;
+                opacity: 1;
             }
         }
 
         /* Mobile: active class from JavaScript */
-        .service-card.active {
-            opacity: 1;
-        }
-
         .service-card.active::before {
             opacity: 0.75;
         }
 
         .service-card.active::after {
             height: 70%;
+            opacity: 1;
         }
 
         .service-card:nth-child(1)::before {
@@ -294,7 +291,7 @@
         }
 
         .service-card h3 {
-            color: #ffffff;
+            color: rgba(255, 255, 255, 1);
             font-size: 1.5rem;
             font-weight: 400;
             transition: font-weight 0.3s;
@@ -302,6 +299,7 @@
             z-index: 2;
             padding: 2.5rem 1.5rem 1rem;
             text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+            opacity: 1;
         }
 
         .service-card > div {
@@ -309,7 +307,7 @@
         }
 
         .service-card p {
-            color: #ffffff;
+            color: rgba(255, 255, 255, 1);
             line-height: 1.5;
             font-size: 0.95rem;
             font-weight: 300;
@@ -317,16 +315,18 @@
             position: relative;
             z-index: 2;
             padding: 0 1.5rem 0.5rem;
+            opacity: 1;
         }
 
         .view-images {
-            color: #ffffff;
+            color: rgba(255, 255, 255, 1);
             font-size: 0.9rem;
             text-decoration: underline;
             position: relative;
             z-index: 2;
             padding: 0 1.5rem 2.5rem;
             transition: color 0.3s;
+            opacity: 1;
         }
 
         /* Desktop: bold on hover */
