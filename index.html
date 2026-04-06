@@ -579,27 +579,34 @@
 
         .modal-carousel {
             position: relative;
-            overflow: hidden;
+            overflow-x: auto;
+            overflow-y: hidden;
             flex: 1;
             display: flex;
             align-items: center;
-            touch-action: pan-y pinch-zoom;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
+        }
+
+        .modal-carousel::-webkit-scrollbar {
+            display: none;
         }
 
         .modal-carousel-inner {
             display: flex;
-            transition: transform 0.3s ease-out;
             height: 100%;
-            width: 100%;
+            min-width: 100%;
         }
 
         .modal-carousel-item {
-            min-width: 100%;
+            flex: 0 0 100%;
             width: 100%;
             height: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
+            scroll-snap-align: start;
         }
 
         .modal-carousel-item img {
@@ -1089,6 +1096,7 @@
 
         const modal = document.getElementById('serviceModal');
         const modalTitle = document.getElementById('modalTitle');
+        const modalCarousel = document.querySelector('.modal-carousel');
         const modalCarouselInner = document.getElementById('modalCarouselInner');
         const modalIndicators = document.getElementById('modalIndicators');
         const modalClose = document.querySelector('.modal-close');
@@ -1128,6 +1136,9 @@
             
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
+            
+            // Reset scroll position
+            modalCarousel.scrollLeft = 0;
         }
 
         function closeModal() {
@@ -1135,13 +1146,24 @@
             document.body.style.overflow = '';
         }
 
-        function goToSlide(index) {
-            const images = serviceImages[currentService];
-            currentSlide = (index + images.length) % images.length;
-            modalCarouselInner.style.transform = `translateX(-${currentSlide * 100}%)`;
+        function updateModalIndicators() {
+            const scrollLeft = modalCarousel.scrollLeft;
+            const width = modalCarousel.offsetWidth;
+            const activeIndex = Math.round(scrollLeft / width);
+            currentSlide = activeIndex;
             
             document.querySelectorAll('.modal-carousel-indicator').forEach((ind, i) => {
-                ind.classList.toggle('active', i === currentSlide);
+                ind.classList.toggle('active', i === activeIndex);
+            });
+        }
+
+        function goToSlide(index) {
+            const images = serviceImages[currentService];
+            const boundedIndex = (index + images.length) % images.length;
+            const width = modalCarousel.offsetWidth;
+            modalCarousel.scrollTo({
+                left: width * boundedIndex,
+                behavior: 'smooth'
             });
         }
 
@@ -1161,6 +1183,9 @@
         nextBtn.addEventListener('click', nextSlide);
         prevBtn.addEventListener('click', prevSlide);
         
+        // Update indicators on scroll
+        modalCarousel.addEventListener('scroll', updateModalIndicators);
+        
         // Keyboard navigation
         document.addEventListener('keydown', (e) => {
             if (!modal.classList.contains('active')) return;
@@ -1168,40 +1193,6 @@
             if (e.key === 'ArrowLeft') prevSlide();
             if (e.key === 'ArrowRight') nextSlide();
         });
-
-        // Touch/swipe support
-        let touchStartX = 0;
-        let touchEndX = 0;
-        let touchStartY = 0;
-        let touchEndY = 0;
-
-        modalCarouselInner.addEventListener('touchstart', (e) => {
-            touchStartX = e.changedTouches[0].screenX;
-            touchStartY = e.changedTouches[0].screenY;
-        }, { passive: true });
-
-        modalCarouselInner.addEventListener('touchend', (e) => {
-            touchEndX = e.changedTouches[0].screenX;
-            touchEndY = e.changedTouches[0].screenY;
-            handleSwipe();
-        }, { passive: true });
-
-        function handleSwipe() {
-            const swipeThreshold = 50;
-            const diffX = touchStartX - touchEndX;
-            const diffY = Math.abs(touchStartY - touchEndY);
-            
-            // Only trigger if horizontal swipe is greater than vertical
-            if (Math.abs(diffX) > swipeThreshold && Math.abs(diffX) > diffY) {
-                if (diffX > 0) {
-                    // Swiped left - next slide
-                    nextSlide();
-                } else {
-                    // Swiped right - prev slide
-                    prevSlide();
-                }
-            }
-        }
     </script>
 </body>
 </html>
