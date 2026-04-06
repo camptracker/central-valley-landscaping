@@ -194,21 +194,75 @@
         /* Services */
         .services-grid {
             border-top: 1px solid #333;
-            display: grid;
-            gap: 0;
         }
 
-        /* Desktop: grid layout */
+        /* Desktop: horizontal scroll */
         @media (min-width: 769px) {
             .services-grid {
-                grid-template-columns: repeat(3, 1fr);
+                display: flex;
+                overflow-x: auto;
+                overflow-y: hidden;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                gap: 0;
+                scroll-behavior: smooth;
+            }
+
+            .services-grid::-webkit-scrollbar {
+                height: 8px;
+            }
+
+            .services-grid::-webkit-scrollbar-track {
+                background: #2a2a2a;
+            }
+
+            .services-grid::-webkit-scrollbar-thumb {
+                background: #666;
+                border-radius: 4px;
+            }
+
+            .services-grid::-webkit-scrollbar-thumb:hover {
+                background: #888;
             }
         }
 
-        /* Mobile: single column grid */
+        /* Mobile: grid layout */
         @media (max-width: 768px) {
             .services-grid {
+                display: grid;
                 grid-template-columns: 1fr;
+                gap: 0;
+            }
+        }
+
+        .services-indicators {
+            display: none;
+        }
+
+        @media (min-width: 769px) {
+            .services-indicators {
+                display: flex;
+                justify-content: center;
+                gap: 0.8rem;
+                margin-top: 2rem;
+            }
+
+            .services-indicator {
+                width: 12px;
+                height: 12px;
+                border-radius: 50%;
+                background: #666;
+                cursor: pointer;
+                transition: all 0.3s;
+            }
+
+            .services-indicator.active {
+                background: #ffffff;
+                transform: scale(1.3);
+            }
+
+            .services-indicator:hover {
+                background: #999;
             }
         }
 
@@ -227,18 +281,13 @@
             cursor: pointer;
         }
 
-        /* Desktop: 50% opacity by default, 100% on hover */
+        /* Desktop: horizontal scroll cards */
         @media (min-width: 769px) {
             .service-card {
-                opacity: 0.5;
-            }
-
-            .service-card:hover {
+                flex: 0 0 500px;
+                width: 500px;
+                scroll-snap-align: start;
                 opacity: 1;
-            }
-
-            .service-card:nth-child(3n) {
-                border-right: none;
             }
         }
 
@@ -891,6 +940,17 @@
                     </div>
                 </div>
             </div>
+            <div class="services-indicators">
+                <div class="services-indicator active" data-index="0"></div>
+                <div class="services-indicator" data-index="1"></div>
+                <div class="services-indicator" data-index="2"></div>
+                <div class="services-indicator" data-index="3"></div>
+                <div class="services-indicator" data-index="4"></div>
+                <div class="services-indicator" data-index="5"></div>
+                <div class="services-indicator" data-index="6"></div>
+                <div class="services-indicator" data-index="7"></div>
+                <div class="services-indicator" data-index="8"></div>
+            </div>
         </div>
     </section>
 
@@ -1083,6 +1143,39 @@
         // Update indicator on scroll
         galleryGrid.addEventListener('scroll', updateGalleryIndicator);
         updateGalleryIndicator();
+
+        // Services carousel indicators (desktop only)
+        if (window.innerWidth > 768) {
+            const servicesGrid = document.querySelector('.services-grid');
+            const serviceCards = document.querySelectorAll('.service-card');
+            const servicesIndicators = document.querySelectorAll('.services-indicator');
+
+            // Update active indicator based on scroll position
+            function updateServicesIndicator() {
+                const scrollLeft = servicesGrid.scrollLeft;
+                const cardWidth = serviceCards[0].offsetWidth;
+                const activeIndex = Math.round(scrollLeft / cardWidth);
+                
+                servicesIndicators.forEach((indicator, index) => {
+                    indicator.classList.toggle('active', index === activeIndex);
+                });
+            }
+
+            // Click indicator to scroll to specific service
+            servicesIndicators.forEach((indicator, index) => {
+                indicator.addEventListener('click', () => {
+                    const cardWidth = serviceCards[0].offsetWidth;
+                    servicesGrid.scrollTo({
+                        left: cardWidth * index,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Update indicator on scroll
+            servicesGrid.addEventListener('scroll', updateServicesIndicator);
+            updateServicesIndicator();
+        }
 
         // Service modal functionality
         const serviceImages = {
