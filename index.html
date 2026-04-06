@@ -439,6 +439,44 @@
             }
         }
 
+        /* Why Choose Us */
+        #why-choose-us {
+            background: #ffffff;
+        }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+        }
+
+        .why-card {
+            padding: 2.5rem 2rem;
+            border-left: 3px solid #1a1a1a;
+        }
+
+        .why-number {
+            font-size: 3rem;
+            font-weight: 300;
+            color: #e0e0e0;
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+        }
+
+        .why-card h3 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: #1a1a1a;
+            margin-bottom: 1rem;
+        }
+
+        .why-card p {
+            color: #666;
+            line-height: 1.8;
+            font-size: 0.95rem;
+            font-weight: 300;
+        }
+
         /* Contact Form */
         #contact {
             background: #f8f8f8;
@@ -728,6 +766,11 @@
                 border-right: none;
             }
 
+            .why-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
             .form-row {
                 grid-template-columns: 1fr;
                 gap: 0;
@@ -743,6 +786,7 @@
             <ul>
                 <li><a href="#services">Services</a></li>
                 <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#why-choose-us">Why Us</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
@@ -866,6 +910,35 @@
                     <div class="gallery-indicator" data-index="3"></div>
                     <div class="gallery-indicator" data-index="4"></div>
                     <div class="gallery-indicator" data-index="5"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section id="why-choose-us">
+        <div class="container">
+            <h2>Why Choose Us</h2>
+            <div class="why-grid">
+                <div class="why-card">
+                    <div class="why-number">01</div>
+                    <h3>Local Expertise</h3>
+                    <p>Deep understanding of Central Valley's unique climate and soil conditions for optimal landscaping results.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-number">02</div>
+                    <h3>Quality Workmanship</h3>
+                    <p>Meticulous attention to detail and commitment to excellence in every project, large or small.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-number">03</div>
+                    <h3>Sustainable Practices</h3>
+                    <p>Water-efficient solutions and eco-friendly methods that benefit both your landscape and the environment.</p>
+                </div>
+                <div class="why-card">
+                    <div class="why-number">04</div>
+                    <h3>Transparent Pricing</h3>
+                    <p>Clear, upfront quotes with no hidden fees. You'll know exactly what to expect before we begin.</p>
                 </div>
             </div>
         </div>
