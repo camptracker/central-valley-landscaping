@@ -454,14 +454,18 @@
 
         /* How Pricing Works */
         #how-pricing-works {
-            background: #f8f8f8;
+            background: #1a1a1a;
+        }
+
+        #how-pricing-works h2 {
+            color: #ffffff;
         }
 
         .pricing-works-description {
             max-width: 700px;
             margin: 0 auto;
             text-align: center;
-            color: #333;
+            color: rgba(255, 255, 255, 0.9);
             font-size: 1.2rem;
             line-height: 2;
             font-weight: 300;
@@ -1217,18 +1221,32 @@
             if (e.key === 'ArrowRight') nextSlide();
         });
 
-        // Navigation color inversion for services section
+        // Navigation color inversion for dark sections
         const navElement = document.querySelector('nav');
         const servicesSection = document.getElementById('services');
+        const pricingSection = document.getElementById('how-pricing-works');
 
         function checkNavInversion() {
-            if (!servicesSection) return;
-            
-            const servicesRect = servicesSection.getBoundingClientRect();
             const navHeight = navElement.offsetHeight;
+            let shouldInvert = false;
             
-            // Check if services section overlaps with nav
-            if (servicesRect.top <= navHeight && servicesRect.bottom > navHeight) {
+            // Check services section
+            if (servicesSection) {
+                const servicesRect = servicesSection.getBoundingClientRect();
+                if (servicesRect.top <= navHeight && servicesRect.bottom > navHeight) {
+                    shouldInvert = true;
+                }
+            }
+            
+            // Check pricing section
+            if (pricingSection) {
+                const pricingRect = pricingSection.getBoundingClientRect();
+                if (pricingRect.top <= navHeight && pricingRect.bottom > navHeight) {
+                    shouldInvert = true;
+                }
+            }
+            
+            if (shouldInvert) {
                 navElement.classList.add('inverted');
             } else {
                 navElement.classList.remove('inverted');
