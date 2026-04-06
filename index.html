@@ -290,6 +290,7 @@
             margin-bottom: 1rem;
             font-size: 1.5rem;
             font-weight: 400;
+            transition: font-weight 0.3s;
         }
 
         .service-card p {
@@ -297,6 +298,26 @@
             line-height: 1.8;
             font-size: 0.95rem;
             font-weight: 300;
+            transition: font-weight 0.3s;
+        }
+
+        /* Desktop: bold on hover */
+        @media (min-width: 769px) {
+            .service-card:hover h3 {
+                font-weight: 600;
+            }
+            .service-card:hover p {
+                font-weight: 400;
+            }
+        }
+
+        /* Mobile: bold when active (centered) */
+        .service-card.active h3 {
+            font-weight: 600;
+        }
+
+        .service-card.active p {
+            font-weight: 400;
         }
 
         /* Gallery */
