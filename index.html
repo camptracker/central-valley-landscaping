@@ -748,29 +748,34 @@
         if (window.innerWidth <= 768) {
             const serviceCards = document.querySelectorAll('.service-card');
             
-            const observer = new IntersectionObserver((entries) => {
-                let mostVisible = null;
-                let maxRatio = 0;
+            function updateActiveCard() {
+                const viewportCenter = window.innerHeight / 2 + window.scrollY;
+                let closestCard = null;
+                let minDistance = Infinity;
 
-                entries.forEach(entry => {
-                    if (entry.intersectionRatio > maxRatio) {
-                        maxRatio = entry.intersectionRatio;
-                        mostVisible = entry.target;
+                serviceCards.forEach(card => {
+                    const rect = card.getBoundingClientRect();
+                    const cardCenter = rect.top + window.scrollY + (rect.height / 2);
+                    const distance = Math.abs(viewportCenter - cardCenter);
+                    
+                    if (distance < minDistance) {
+                        minDistance = distance;
+                        closestCard = card;
                     }
                 });
 
                 // Remove active class from all cards
                 serviceCards.forEach(card => card.classList.remove('active'));
                 
-                // Add active class to most visible card
-                if (mostVisible && maxRatio > 0.3) {
-                    mostVisible.classList.add('active');
+                // Add active class to card closest to viewport center
+                if (closestCard) {
+                    closestCard.classList.add('active');
                 }
-            }, {
-                threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
-            });
+            }
 
-            serviceCards.forEach(card => observer.observe(card));
+            // Update on scroll and initially
+            window.addEventListener('scroll', updateActiveCard);
+            updateActiveCard();
         }
     </script>
 </body>
