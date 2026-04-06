@@ -164,22 +164,30 @@
             letter-spacing: -1px;
         }
 
+        #services {
+            background: #1a1a1a;
+        }
+
+        #services h2 {
+            color: #ffffff;
+        }
+
         /* Services */
         .services-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 0;
-            border-top: 1px solid #e0e0e0;
+            border-top: 1px solid #333;
         }
 
         .service-card {
             padding: 3rem 2.5rem;
-            border-right: 1px solid #e0e0e0;
-            border-bottom: 1px solid #e0e0e0;
+            border-right: 1px solid #333;
+            border-bottom: 1px solid #333;
             transition: all 0.5s ease;
             position: relative;
             overflow: hidden;
-            background: #ffffff;
+            background: #1a1a1a;
         }
 
         .service-card::before {
@@ -254,7 +262,7 @@
         }
 
         .service-card h3 {
-            color: #1a1a1a;
+            color: #ffffff;
             margin-bottom: 1rem;
             font-size: 1.5rem;
             font-weight: 400;
@@ -262,7 +270,7 @@
         }
 
         .service-card p {
-            color: #666;
+            color: rgba(255, 255, 255, 0.8);
             line-height: 1.8;
             font-size: 0.95rem;
             font-weight: 300;
