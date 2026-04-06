@@ -252,6 +252,11 @@
                 height: 70%;
                 opacity: 1;
             }
+            .service-card:hover h3,
+            .service-card:hover p,
+            .service-card:hover .view-images {
+                opacity: 1;
+            }
         }
 
         /* Mobile: active class from JavaScript */
@@ -261,6 +266,12 @@
 
         .service-card.active::after {
             height: 70%;
+            opacity: 1;
+        }
+
+        .service-card.active h3,
+        .service-card.active p,
+        .service-card.active .view-images {
             opacity: 1;
         }
 
@@ -310,14 +321,15 @@
         }
 
         .service-card h3 {
-            color: #ffffff !important;
+            color: #ffffff;
             font-size: 1.5rem;
             font-weight: 400;
-            transition: font-weight 0.3s;
+            transition: font-weight 0.3s, opacity 0.5s;
             position: relative;
             z-index: 2;
             padding: 2.5rem 1.5rem 1rem;
             text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+            opacity: 0.1;
         }
 
         .service-card > div {
@@ -325,24 +337,26 @@
         }
 
         .service-card p {
-            color: #ffffff !important;
+            color: #ffffff;
             line-height: 1.5;
             font-size: 0.95rem;
             font-weight: 300;
-            transition: font-weight 0.3s;
+            transition: font-weight 0.3s, opacity 0.5s;
             position: relative;
             z-index: 2;
             padding: 0 1.5rem 0.5rem;
+            opacity: 0.1;
         }
 
         .view-images {
-            color: #ffffff !important;
+            color: #ffffff;
             font-size: 0.9rem;
             text-decoration: underline;
             position: relative;
             z-index: 2;
             padding: 0 1.5rem 2.5rem;
-            transition: color 0.3s;
+            transition: color 0.3s, opacity 0.5s;
+            opacity: 0.1;
         }
 
         /* Desktop: bold on hover */
