@@ -400,9 +400,15 @@
             }
         }
 
-        /* Mobile: show description when active (centered) */
-        .service-card.active .service-text p {
-            opacity: 1;
+        /* Mobile: full opacity and show description when active (centered) */
+        @media (max-width: 768px) {
+            .service-card.active {
+                opacity: 1;
+            }
+
+            .service-card.active .service-text p {
+                opacity: 1;
+            }
         }
 
         /* Gallery */
