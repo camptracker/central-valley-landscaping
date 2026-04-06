@@ -356,8 +356,6 @@
             z-index: 2;
             background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.7) 70%, transparent 100%);
             padding: 3rem 1.5rem 2rem;
-            opacity: 0;
-            transition: opacity 0.5s ease;
         }
 
         .service-text p {
@@ -366,6 +364,8 @@
             line-height: 1.6;
             font-weight: 300;
             margin-bottom: 1rem;
+            opacity: 0;
+            transition: opacity 0.5s ease;
         }
 
         .view-images {
@@ -380,10 +380,8 @@
             .service-card:hover h3 {
                 font-weight: 600;
             }
-            .service-card:hover p {
+            .service-card:hover .service-text p {
                 font-weight: 400;
-            }
-            .service-card:hover .service-text {
                 opacity: 1;
             }
         }
@@ -393,11 +391,8 @@
             font-weight: 600;
         }
 
-        .service-card.active p {
+        .service-card.active .service-text p {
             font-weight: 400;
-        }
-
-        .service-card.active .service-text {
             opacity: 1;
         }
 
