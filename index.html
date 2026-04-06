@@ -322,7 +322,7 @@
         .service-card h3 {
             color: #ffffff;
             font-size: 1.8rem;
-            font-weight: 400;
+            font-weight: 600;
             position: relative;
             z-index: 2;
             padding: 2.5rem 1.5rem 1rem;
@@ -340,7 +340,7 @@
             color: #ffffff;
             font-size: 0.95rem;
             line-height: 1.6;
-            font-weight: 300;
+            font-weight: 400;
             margin-bottom: 1rem;
             opacity: 0;
             transition: opacity 0.5s ease;
@@ -353,24 +353,15 @@
             font-weight: 300;
         }
 
-        /* Desktop: bold on hover + show description */
+        /* Desktop: show description on hover */
         @media (min-width: 769px) {
-            .service-card:hover h3 {
-                font-weight: 600;
-            }
             .service-card:hover .service-text p {
-                font-weight: 400;
                 opacity: 1;
             }
         }
 
-        /* Mobile: bold when active (centered) + show description */
-        .service-card.active h3 {
-            font-weight: 600;
-        }
-
+        /* Mobile: show description when active (centered) */
         .service-card.active .service-text p {
-            font-weight: 400;
             opacity: 1;
         }
 
