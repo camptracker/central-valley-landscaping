@@ -194,44 +194,21 @@
         /* Services */
         .services-grid {
             border-top: 1px solid #333;
+            display: grid;
+            gap: 0;
         }
 
-        /* Desktop: horizontal scroll */
+        /* Desktop: grid layout */
         @media (min-width: 769px) {
             .services-grid {
-                display: flex;
-                overflow-x: auto;
-                overflow-y: hidden;
-                scroll-snap-type: x mandatory;
-                -webkit-overflow-scrolling: touch;
-                gap: 0;
-                scroll-behavior: smooth;
-            }
-
-            .services-grid::-webkit-scrollbar {
-                height: 8px;
-            }
-
-            .services-grid::-webkit-scrollbar-track {
-                background: #2a2a2a;
-            }
-
-            .services-grid::-webkit-scrollbar-thumb {
-                background: #666;
-                border-radius: 4px;
-            }
-
-            .services-grid::-webkit-scrollbar-thumb:hover {
-                background: #888;
+                grid-template-columns: repeat(3, 1fr);
             }
         }
 
-        /* Mobile: grid layout */
+        /* Mobile: single column grid */
         @media (max-width: 768px) {
             .services-grid {
-                display: grid;
                 grid-template-columns: 1fr;
-                gap: 0;
             }
         }
 
@@ -250,13 +227,14 @@
             cursor: pointer;
         }
 
-        /* Desktop: all cards prominent, fixed width for scroll */
+        /* Desktop: all cards prominent in grid */
         @media (min-width: 769px) {
             .service-card {
-                flex: 0 0 500px;
-                width: 500px;
-                scroll-snap-align: start;
                 opacity: 1;
+            }
+
+            .service-card:nth-child(3n) {
+                border-right: none;
             }
         }
 
