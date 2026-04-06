@@ -209,8 +209,8 @@
             background: #1a1a1a;
             min-height: 400px;
             display: flex;
-            align-items: center;
-            justify-content: center;
+            flex-direction: column;
+            justify-content: space-between;
             cursor: pointer;
         }
 
@@ -288,12 +288,34 @@
 
         .service-card h3 {
             color: #ffffff;
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: 400;
             position: relative;
             z-index: 2;
-            text-align: center;
+            padding: 2.5rem 1.5rem 1rem;
             text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+        }
+
+        .service-text {
+            position: relative;
+            z-index: 2;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.7) 70%, transparent 100%);
+            padding: 3rem 1.5rem 2rem;
+        }
+
+        .service-text p {
+            color: #ffffff;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+
+        .view-images {
+            color: #ffffff;
+            font-size: 0.9rem;
+            text-decoration: underline;
+            font-weight: 300;
         }
 
         /* Desktop: bold on hover */
@@ -760,30 +782,66 @@
             <div class="services-grid">
                 <div class="service-card" data-service="landscape-design">
                     <h3>Landscape Design</h3>
+                    <div class="service-text">
+                        <p>Custom landscape design tailored to your vision. We create stunning outdoor spaces that reflect your style while considering Central Valley's unique climate and terrain.</p>
+                        <div class="view-images">View Images</div>
+                    </div>
                 </div>
                 <div class="service-card" data-service="irrigation">
                     <h3>Irrigation Systems</h3>
+                    <div class="service-text">
+                        <p>Water-efficient irrigation solutions designed for California's climate. Smart sprinkler systems, drip irrigation, and water conservation strategies that save money and resources.</p>
+                        <div class="view-images">View Images</div>
+                    </div>
                 </div>
                 <div class="service-card" data-service="lawn-care">
                     <h3>Lawn Care & Maintenance</h3>
+                    <div class="service-text">
+                        <p>Regular mowing, edging, fertilization, and seasonal care to keep your lawn healthy and beautiful year-round. Weekly, bi-weekly, or monthly service plans available.</p>
+                        <div class="view-images">View Images</div>
+                    </div>
                 </div>
                 <div class="service-card" data-service="hardscaping">
                     <h3>Hardscaping</h3>
+                    <div class="service-text">
+                        <p>Patios, walkways, retaining walls, and outdoor living spaces. Quality stonework and concrete installations that add beauty and functionality to your property.</p>
+                        <div class="view-images">View Images</div>
+                    </div>
                 </div>
                 <div class="service-card" data-service="tree-care">
                     <h3>Tree & Shrub Care</h3>
+                    <div class="service-text">
+                        <p>Professional pruning, trimming, planting, and removal services. We maintain the health and appearance of your trees and ornamental shrubs with expert care.</p>
+                        <div class="view-images">View Images</div>
+                    </div>
                 </div>
                 <div class="service-card" data-service="garden-design">
                     <h3>Garden Design & Planting</h3>
+                    <div class="service-text">
+                        <p>Beautiful garden beds featuring drought-tolerant plants, seasonal flowers, and native California species. Custom designs that thrive in Central Valley conditions.</p>
+                        <div class="view-images">View Images</div>
+                    </div>
                 </div>
                 <div class="service-card" data-service="seasonal-cleanup">
                     <h3>Seasonal Cleanup</h3>
+                    <div class="service-text">
+                        <p>Spring and fall cleanup services including leaf removal, debris clearing, mulching, and preparation for seasonal changes to keep your landscape pristine.</p>
+                        <div class="view-images">View Images</div>
+                    </div>
                 </div>
                 <div class="service-card" data-service="outdoor-lighting">
                     <h3>Outdoor Lighting</h3>
+                    <div class="service-text">
+                        <p>Landscape lighting design and installation to enhance safety and showcase your property's beauty at night. Energy-efficient LED solutions available.</p>
+                        <div class="view-images">View Images</div>
+                    </div>
                 </div>
                 <div class="service-card" data-service="sod-installation">
                     <h3>Sod Installation</h3>
+                    <div class="service-text">
+                        <p>High-quality sod installation for instant lawns. We prepare soil properly and install premium grass varieties suited to Central Valley's hot summers.</p>
+                        <div class="view-images">View Images</div>
+                    </div>
                 </div>
             </div>
         </div>
