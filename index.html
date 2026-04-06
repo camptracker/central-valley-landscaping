@@ -27,6 +27,12 @@
             z-index: 1000;
             border-bottom: 1px solid #e0e0e0;
             backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        nav.inverted {
+            background: rgba(26, 26, 26, 0.98);
+            border-bottom: 1px solid #333;
         }
 
         nav .container {
@@ -43,6 +49,11 @@
             font-weight: 600;
             color: #1a1a1a;
             letter-spacing: -0.5px;
+            transition: color 0.3s ease;
+        }
+
+        nav.inverted .logo {
+            color: #ffffff;
         }
 
         nav ul {
@@ -60,8 +71,16 @@
             letter-spacing: 0.3px;
         }
 
+        nav.inverted a {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
         nav a:hover {
             color: #1a1a1a;
+        }
+
+        nav.inverted a:hover {
+            color: #ffffff;
         }
 
         /* Hero Section */
@@ -1190,6 +1209,28 @@
             if (e.key === 'ArrowLeft') prevSlide();
             if (e.key === 'ArrowRight') nextSlide();
         });
+
+        // Navigation color inversion for services section
+        const navElement = document.querySelector('nav');
+        const servicesSection = document.getElementById('services');
+
+        function checkNavInversion() {
+            if (!servicesSection) return;
+            
+            const servicesRect = servicesSection.getBoundingClientRect();
+            const navHeight = navElement.offsetHeight;
+            
+            // Check if services section overlaps with nav
+            if (servicesRect.top <= navHeight && servicesRect.bottom > navHeight) {
+                navElement.classList.add('inverted');
+            } else {
+                navElement.classList.remove('inverted');
+            }
+        }
+
+        // Check on scroll and initially
+        window.addEventListener('scroll', checkNavInversion);
+        checkNavInversion();
     </script>
 </body>
 </html>
