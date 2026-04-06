@@ -194,37 +194,52 @@
         /* Services */
         .services-grid {
             border-top: 1px solid #333;
-            display: flex;
-            overflow-x: auto;
-            overflow-y: hidden;
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
-            gap: 0;
-            scroll-behavior: smooth;
         }
 
-        .services-grid::-webkit-scrollbar {
-            height: 8px;
+        /* Desktop: 5-column grid */
+        @media (min-width: 769px) {
+            .services-grid {
+                display: grid;
+                grid-template-columns: repeat(5, 1fr);
+                gap: 0;
+            }
         }
 
-        .services-grid::-webkit-scrollbar-track {
-            background: #2a2a2a;
-        }
+        /* Mobile: horizontal scroll */
+        @media (max-width: 768px) {
+            .services-grid {
+                display: flex;
+                overflow-x: auto;
+                overflow-y: hidden;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                gap: 0;
+                scroll-behavior: smooth;
+            }
 
-        .services-grid::-webkit-scrollbar-thumb {
-            background: #666;
-            border-radius: 4px;
-        }
+            .services-grid::-webkit-scrollbar {
+                height: 8px;
+            }
 
-        .services-grid::-webkit-scrollbar-thumb:hover {
-            background: #888;
+            .services-grid::-webkit-scrollbar-track {
+                background: #2a2a2a;
+            }
+
+            .services-grid::-webkit-scrollbar-thumb {
+                background: #666;
+                border-radius: 4px;
+            }
+
+            .services-grid::-webkit-scrollbar-thumb:hover {
+                background: #888;
+            }
         }
 
         .services-indicators {
             display: none;
         }
 
-        @media (min-width: 769px) {
+        @media (max-width: 768px) {
             .services-indicators {
                 display: flex;
                 justify-content: center;
@@ -264,24 +279,26 @@
             flex-direction: column;
             justify-content: space-between;
             cursor: pointer;
-            scroll-snap-align: start;
         }
 
-        /* Desktop: 500px wide cards */
+        /* Desktop: grid layout, remove right border on 5th column */
         @media (min-width: 769px) {
             .service-card {
-                flex: 0 0 500px;
-                width: 500px;
                 opacity: 1;
+            }
+
+            .service-card:nth-child(5n) {
+                border-right: none;
             }
         }
 
-        /* Mobile: full viewport width cards, opacity behavior */
+        /* Mobile: horizontal carousel with opacity behavior */
         @media (max-width: 768px) {
             .service-card {
                 flex: 0 0 85vw;
                 width: 85vw;
                 opacity: 0.25;
+                scroll-snap-align: start;
             }
         }
 
@@ -814,14 +831,6 @@
                 padding: 4rem 1.5rem;
             }
 
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .service-card {
-                border-right: none;
-            }
-
             .form-row {
                 grid-template-columns: 1fr;
                 gap: 0;
@@ -1135,8 +1144,8 @@
         galleryGrid.addEventListener('scroll', updateGalleryIndicator);
         updateGalleryIndicator();
 
-        // Services carousel indicators (desktop only)
-        if (window.innerWidth > 768) {
+        // Services carousel indicators (mobile only)
+        if (window.innerWidth <= 768) {
             const servicesGrid = document.querySelector('.services-grid');
             const serviceCards = document.querySelectorAll('.service-card');
             const servicesIndicators = document.querySelectorAll('.services-indicator');
